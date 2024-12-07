@@ -8,7 +8,7 @@ import (
 
 var configVariables map[string]string
 
-func LoadEnv(key string) error {
+func LoadEnv() error {
 	var err error
 	configVariables, err = godotenv.Read(".env")
 	if err != nil {

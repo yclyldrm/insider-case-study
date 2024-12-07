@@ -5,7 +5,7 @@ import (
 	"insider-case-study/internal/interfaces"
 	"log"
 
-	"project/config"
+	"insider-case-study/config"
 
 	"github.com/gofiber/fiber/v2"
 )
