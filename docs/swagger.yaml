@@ -1,0 +1,121 @@
+basePath: /api
+definitions:
+  message.MessageResponse:
+    properties:
+      content:
+        example: Hello World
+        type: string
+      id:
+        example: 1
+        type: integer
+      messageId:
+        example: msg123
+        type: string
+      sentAt:
+        type: string
+      status:
+        example: true
+        type: boolean
+      to:
+        example: "+123545"
+        type: string
+    type: object
+host: localhost:9005
+info:
+  contact: {}
+  description: This is a message service server with job management.
+  title: Message Service API
+  version: "1.0"
+paths:
+  /job-status:
+    post:
+      consumes:
+      - application/json
+      description: Enable or disable the message sending job
+      parameters:
+      - description: Job status (true/false)
+        in: body
+        name: status
+        required: true
+        schema:
+          type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Returns job status
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Change job status
+      tags:
+      - jobs
+  /messages:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves all messages that have been sent
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Returns sent messages
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get all sent messages
+      tags:
+      - messages
+  /messages/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a specific message by its ID
+      parameters:
+      - description: Message ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Returns the message
+          schema:
+            $ref: '#/definitions/message.MessageResponse'
+        "400":
+          description: Bad request - missing ID
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Message not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a specific sent message
+      tags:
+      - messages
+swagger: "2.0"

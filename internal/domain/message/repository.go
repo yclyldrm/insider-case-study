@@ -1,7 +1,7 @@
 package message
 
 import (
-	"time"
+	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -9,7 +9,7 @@ import (
 type MessageRepository interface {
 	GetUnsentMessages() ([]*Message, error)
 	GetSentMessages() ([]*Message, error)
-	ChangeStatusandSentTime(*Message) error
+	UpdateMessage(*Message) error
 }
 
 type messageRepository struct {
@@ -34,9 +34,14 @@ func (mr *messageRepository) GetSentMessages() ([]*Message, error) {
 	return messages, err
 }
 
-func (mr *messageRepository) ChangeStatusandSentTime(message *Message) error {
+func (mr *messageRepository) UpdateMessage(message *Message) error {
+	if message == nil {
+		return fmt.Errorf("message cannot be nil")
+	}
+
 	return mr.DB.Model(message).Updates(map[string]interface{}{
-		"status":  true,
-		"sent_at": time.Now,
+		"status":     true,
+		"sent_at":    message.SentAt,
+		"message_id": message.MessageID,
 	}).Error
 }

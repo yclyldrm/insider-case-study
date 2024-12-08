@@ -7,7 +7,7 @@ import (
 type MessageService interface {
 	GetSentMessages() ([]*message.Message, error)
 	GetUnsentMessages() ([]*message.Message, error)
-	ChangeStatusandSentTime(*message.Message) error
+	UpdateMessage(*message.Message) error
 }
 
 type messageService struct {
@@ -26,6 +26,6 @@ func (ms *messageService) GetUnsentMessages() ([]*message.Message, error) {
 	return ms.messageRepo.GetUnsentMessages()
 }
 
-func (ms *messageService) ChangeStatusandSentTime(message *message.Message) error {
-	return ms.messageRepo.ChangeStatusandSentTime(message)
+func (ms *messageService) UpdateMessage(message *message.Message) error {
+	return ms.messageRepo.UpdateMessage(message)
 }

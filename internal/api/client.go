@@ -20,7 +20,7 @@ func NewClient() *Client {
 	client := &Client{
 		url: url,
 		httpClient: &http.Client{
-			Timeout: 10 * time.Second,
+			Timeout: 15 * time.Second,
 		},
 	}
 
@@ -28,9 +28,13 @@ func NewClient() *Client {
 }
 
 func (c *Client) sendRequest(method string, params, response map[string]string) error {
+	if c.url == "" {
+		return fmt.Errorf("webhook URL is not configured")
+	}
+
 	payload, err := json.Marshal(params)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to marshal params: %w", err)
 	}
 
 	request, err := http.NewRequest(method, c.url, bytes.NewBuffer(payload))
@@ -41,7 +45,6 @@ func (c *Client) sendRequest(method string, params, response map[string]string) 
 	request.Header.Set("Content-Type", "application/json")
 
 	resp, err := c.httpClient.Do(request)
-
 	if err != nil {
 		return fmt.Errorf("failed to send request: %w", err)
 	}

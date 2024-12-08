@@ -1,0 +1,16 @@
+INSERT INTO messages (content, receiver, status, sent_at) VALUES
+('Hello, this is a test message 1', '+12345678901', FALSE, NULL),
+('Hello, this is a test message 2', '+12345678902', TRUE, '2024-12-08 10:00:00'),
+('Hello, this is a test message 3', '+12345678903', FALSE, NULL),
+('Hello, this is a test message 4', '+12345678904', TRUE, '2024-12-08 11:00:00'),
+('Hello, this is a test message 5', '+12345678905', FALSE, NULL),
+('Hello, this is a test message 6', '+12345678906', TRUE, '2024-12-08 12:00:00'),
+('Hello, this is a test message 7', '+12345678907', FALSE, NULL),
+('Hello, this is a test message 8', '+12345678908', TRUE, '2024-12-08 13:00:00'),
+('Hello, this is a test message 9', '+12345678909', FALSE, NULL),
+('Hello, this is a test message 10', '+12345678910', TRUE, '2024-12-08 14:00:00'),
+('Hello, this is a test message 11', '+12345678911', FALSE, NULL),
+('Hello, this is a test message 12', '+12345678912', TRUE, '2024-12-08 15:00:00'),
+('Hello, this is a test message 13', '+12345678913', FALSE, NULL),
+('Hello, this is a test message 14', '+12345678914', TRUE, '2024-12-08 16:00:00'),
+('Hello, this is a test message 15', '+12345678915', FALSE, NULL);
